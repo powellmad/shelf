@@ -10,5 +10,5 @@ class Shipping(models.Model):
     address = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
-    zipcode = models.IntegerField(max_length=10)
-    phone = models.IntegerField(max_length=10)
+    zipcode = models.IntegerField()
+    phone = models.IntegerField()
