@@ -1,0 +1,12 @@
+{
+    "python.linting.enabled": false,
+    "python.pythonPath": "/Users/madisonpowell/.local/share/virtualenvs/shelf-fwQnJzCZ/bin/python",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Shelf API",
+            "database": "db.sqlite3"
+        }
+    ]
+}
