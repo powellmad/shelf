@@ -1,0 +1,58 @@
+[
+    {
+        "model": "shelfapi.product",
+        "pk": 1,
+        "fields": {
+            "name": "Fixed Bracket Suspended Shelves",
+            "image_path": "1-fixed-bracket-shelf.jpeg",
+            "quantity": 42,
+            "description": "High-quality light wood shelving. 8\"x2\" can hold up to 50 lbs. Used for storage in kitchen, bathroom, closet, bedroom, office or anywhere.",
+            "price": 27.99,
+            "subcategory": 1,
+            "shop": 1,
+            "user": 3
+        }
+    },
+    {
+        "model": "shelfapi.product",
+        "pk": 2,
+        "fields": {
+            "name": "Full-Body Vinyl Mannequin",
+            "image_path": "2-full-body-vinyl-mannequin.jpeg",
+            "quantity": 8,
+            "description": "Full-Body, female mannequin for clothing and apparel. 5'7 size 0. Mannequins have head and hands, blank faces. Ivory vinyl material, can withstand heavy-duty coats etc.",
+            "price": 42.50,
+            "subcategory": 4,
+            "shop": 2,
+            "user": 4
+        }
+    },
+    {
+        "model": "shelfapi.product",
+        "pk": 3,
+        "fields": {
+            "name": "Pallet of Clay Bricks",
+            "image_path": "3-clay-brick.jpeg",
+            "quantity": 3255,
+            "description": "Clay Bricks with vertical holes used for construction. Eco-efficient hollow verticle holes. Made with raw clay, strong durability. Comes in a pallet of 500 bricks.",
+            "price": 399.99,
+            "subcategory": 6,
+            "shop": 3,
+            "user": 5
+        }
+    },
+    {
+        "model": "shelfapi.product",
+        "pk": 4,
+        "fields": {
+            "name": "Small Rolling File Cabinet",
+            "image_path": "4-small-rolling-file-cabinet.jpeg",
+            "quantity": 38,
+            "description": "Small 3-drawer aluminum file cabinet. Two 4\" drawers and one 7\" drawer. Sturdy aluminum holds up to 300lbs per drawer. Rolls on 4 small detachable wheels. Comes in light silver or dark charcoal.",
+            "price": 78.99,
+            "subcategory": 3,
+            "shop": 1,
+            "user": 3
+        }
+    }
+]

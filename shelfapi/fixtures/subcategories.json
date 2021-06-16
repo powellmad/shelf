@@ -1,0 +1,51 @@
+[
+    {
+        "model": "shelfapi.subcategory",
+        "pk": 1,
+        "fields": {
+            "label": "Shelving",
+            "category": 1
+        }
+    },
+    {
+        "model": "shelfapi.subcategory",
+        "pk": 2,
+        "fields": {
+            "label": "Racks & Hangers",
+            "category": 2
+        }
+    },
+    {
+        "model": "shelfapi.subcategory",
+        "pk": 3,
+        "fields": {
+            "label": "Storage",
+            "category": 1
+        }
+    },
+    {
+        "model": "shelfapi.subcategory",
+        "pk": 4,
+        "fields": {
+            "label": "Mannequins",
+            "category": 2
+        }
+    },
+    {
+        "model": "shelfapi.subcategory",
+        "pk": 5,
+        "fields": {
+            "label": "Shelves & Displays",
+            "category": 2
+        }
+    },
+    {
+        "model": "shelfapi.subcategory",
+        "pk": 6,
+        "fields": {
+            "label": "Construction",
+            "category": 1
+        }
+    }
+
+]
