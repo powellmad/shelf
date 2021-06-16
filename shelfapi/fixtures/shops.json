@@ -1,0 +1,33 @@
+[
+    {
+        "model": "shelfapi.shop",
+        "pk": 1,
+        "fields": {
+            "name": "Diversified Equipment Company",
+            "category": 1,
+            "user": 3,
+            "logo_path": "diversified_logo.png"
+        }
+    },
+    {
+        "model": "shelfapi.shop",
+        "pk": 2,
+        "fields": {
+            "name": "Waiste Apparel",
+            "category": 2,
+            "user": 4,
+            "logo_path": "waiste_logo.png"
+        }
+    },
+    {
+        "model": "shelfapi.shop",
+        "pk": 3,
+        "fields": {
+            "name": "Industrialabs",
+            "category": 1,
+            "user": 5,
+            "logo_path": "industrialabs_logo.png"
+        }
+    }
+
+]

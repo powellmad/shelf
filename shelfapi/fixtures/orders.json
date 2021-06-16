@@ -1,0 +1,11 @@
+[
+    {
+        "model": "shelfapi.order",
+        "pk": 1,
+        "fields": {
+            "user": 2,
+            "payment_type": 1,
+            "is_open": 0
+        }
+    }
+]

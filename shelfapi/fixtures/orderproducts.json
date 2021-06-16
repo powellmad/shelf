@@ -1,0 +1,26 @@
+[
+    {
+        "model": "shelfapi.orderproduct",
+        "pk": 1,
+        "fields": {
+            "order": 1,
+            "product": 1
+        }
+    },
+    {
+        "model": "shelfapi.orderproduct",
+        "pk": 2,
+        "fields": {
+            "order": 1,
+            "product": 1
+        }
+    },
+    {
+        "model": "shelfapi.orderproduct",
+        "pk": 3,
+        "fields": {
+            "order": 1,
+            "product": 4
+        }
+    }
+]

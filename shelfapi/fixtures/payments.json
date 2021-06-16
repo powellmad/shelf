@@ -1,0 +1,22 @@
+[
+    {
+        "model": "shelfapi.payment",
+        "pk": 1,
+        "fields": {
+            "user": 2,
+            "merchant_name": "Mastercard",
+            "account_number": "5799641382519572",
+            "expiration_date": "2025-01-04"
+        }
+    },
+    {
+        "model": "shelfapi.payment",
+        "pk": 2,
+        "fields": {
+            "user": 4,
+            "merchant_name": "American Express",
+            "account_number": "3857158134527182",
+            "expiration_date": "2022-05-14"
+        }
+    }
+]

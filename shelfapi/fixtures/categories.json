@@ -1,0 +1,24 @@
+[
+    {
+        "model": "shelfapi.category",
+        "pk": 1,
+        "fields": {
+            "label": "Industrial"
+        }
+    },
+    {
+        "model": "shelfapi.category",
+        "pk": 2,
+        "fields": {
+            "label": "Apparel"
+        }
+    },
+    {
+        "model": "shelfapi.category",
+        "pk": 3,
+        "fields": {
+            "label": "Technology"
+        }
+    }
+
+]

@@ -1,0 +1,15 @@
+[
+    {
+        "model": "shelfapi.shipping",
+        "pk": 1,
+        "fields": {
+            "user": 2,
+            "order": 1,
+            "address": "2534 Willow Ave",
+            "city": "Nashville",
+            "state": "Tennessee",
+            "zipcode": 37209,
+            "phone": 6155554203
+        }
+    }
+]
