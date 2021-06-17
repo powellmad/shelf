@@ -11,12 +11,11 @@ from shelfapi.models import Shop, shop, Category
 class ShopView(ViewSet):
 
     def list(self, request):
-        """Handle GET requests to categories resource
+        """Handle GET requests to shops resource
         Returns:
-            Response -- JSON serialized list of categories
+            Response -- JSON serialized list of shops
         """
         shops = Shop.objects.all().order_by('category')
-        shop = self.request.query_params.get('shop', None)
 
         serializer = ShopSerializer(
             shops, many=True, context={'request': request})
@@ -28,8 +27,8 @@ class ShopView(ViewSet):
             Response -- JSON serialized category instance
         """
         try:
-            category = Category.objects.get(pk=pk)
-            serializer = CategorySerializer(category, context={'request': request})
+            shop = Shop.objects.get(pk=pk)
+            serializer = ShopSerializer(shop, context={'request': request})
             return Response(serializer.data)
         except Exception as ex:
             return HttpResponseServerError(ex)
@@ -44,16 +43,19 @@ class ShopView(ViewSet):
         # Create a new Python instance of the Category class
         # and set its properties from what was sent in the
         # body of the request from the client.
-        category = Category()
-        category.label = request.data["label"]
+        shop = Shop()
+        shop.name = request.data["name"]
+        shop.category = request.data["category"]
+        shop.user = request.data["user"]
+        shop.logo_path = request.data["logo_path"]
        
 
         # Try to save the new category to the database, then
         # serialize the category instance as JSON, and send the
         # JSON as a response to the client request
         try:
-            category.save()
-            serializer = PostCategorySerializer(category, context={'request': request})
+            shop.save()
+            serializer = ShopSerializer(category, context={'request': request})
             return Response(serializer.data)
 
         # If anything went wrong, catch the exception and

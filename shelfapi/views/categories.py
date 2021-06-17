@@ -56,7 +56,7 @@ class CategoryView(ViewSet):
         # JSON as a response to the client request
         try:
             category.save()
-            serializer = PostCategorySerializer(category, context={'request': request})
+            serializer = CategorySerializer(category, context={'request': request})
             return Response(serializer.data)
 
         # If anything went wrong, catch the exception and
@@ -66,15 +66,8 @@ class CategoryView(ViewSet):
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
 
+
 class CategorySerializer(serializers.ModelSerializer):
-    """JSON serializer for categories"""
-
-    class Meta:
-        model = Category
-        fields = ('id', 'label' )
-        depth = 1
-
-class PostCategorySerializer(serializers.ModelSerializer):
     """JSON serializer for categories"""
 
     class Meta:

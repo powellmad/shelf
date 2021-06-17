@@ -9,6 +9,5 @@ class Product(models.Model):
     quantity = models.IntegerField()
     description = models.TextField()
     price = models.IntegerField()
-    subcategory = models.ForeignKey(Subcategory, on_delete=DO_NOTHING)
-    shop = models.ForeignKey(Shop, on_delete=CASCADE)
-    user = models.ForeignKey(User, on_delete=CASCADE)
+    subcategory = models.ForeignKey(Subcategory, on_delete=DO_NOTHING, related_name='products')
+    shop = models.ForeignKey(Shop, on_delete=CASCADE, related_name='products')

@@ -6,7 +6,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from shelfapi.models import Product
+from shelfapi.models import Product, Subcategory, Shop
 
 class ProductView(ViewSet):
     def list(self, request):
@@ -14,7 +14,6 @@ class ProductView(ViewSet):
         Returns:
             Response -- JSON serialized list of products
         """
-        # Get the current authenticated user
         products = Product.objects.all()
 
         current_user = self.request.query_params.get('user', None)
@@ -36,6 +35,42 @@ class ProductView(ViewSet):
             return Response(serializer.data)
         except Exception as ex:
             return HttpResponseServerError(ex)
+
+    def create(self, request):
+        """Handle POST operations
+        Returns:
+            Response -- JSON serialized product instance
+        """
+
+        # Create a new Python instance of the Product class
+        # and set its properties from what was sent in the
+        # body of the request from the client.
+        product = Product()
+        product.name = request.data["name"]
+        product.image_path = request.data["image_path"]
+        product.quantity = request.data["quantity"]
+        product.description = request.data["description"]
+        product.price = request.data["price"]
+        
+        subcategory = Subcategory.objects.get(pk=request.data["subcategory_id"])
+        product.subcategory = subcategory
+        
+        shop = Shop.objects.get(pk=request.data["shop_id"])
+        product.shop = shop
+
+        # Try to save the new product to the database, then
+        # serialize the product instance as JSON, and send the
+        # JSON as a response to the client request
+        try:
+            product.save()
+            serializer = ProductSerializer(product, context={'request': request})
+            return Response(serializer.data)
+
+        # If anything went wrong, catch the exception and
+        # send a response with a 400 status code to tell the
+        # client that something was wrong with its request data
+        except ValidationError as ex:
+            return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
     
 class ProductSerializer(serializers.ModelSerializer):
