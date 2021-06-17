@@ -73,9 +73,10 @@ class ProductView(ViewSet):
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, pk=None):
-        """Handle PUT operations
+        """Handle PUT requests for a product
+
         Returns:
-            Response -- JSON serialized product instance updated
+            Response -- Empty body with 204 status code
         """
         product = Product.objects.get(pk=pk)
         product.name = request.data["name"]
