@@ -1,3 +1,4 @@
+from shelfapi.views import categories
 from django.http import HttpResponseServerError
 from django.core.exceptions import ValidationError
 from rest_framework import status
@@ -45,9 +46,11 @@ class ShopView(ViewSet):
         # body of the request from the client.
         shop = Shop()
         shop.name = request.data["name"]
-        shop.category = request.data["category"]
-        shop.user = request.data["user"]
         shop.logo_path = request.data["logo_path"]
+        shop.user = request.auth.user
+
+        category = Category.objects.get(pk=request.data["category"])
+        shop.category = category
        
 
         # Try to save the new category to the database, then
@@ -55,7 +58,7 @@ class ShopView(ViewSet):
         # JSON as a response to the client request
         try:
             shop.save()
-            serializer = ShopSerializer(category, context={'request': request})
+            serializer = ShopSerializer(shop, context={'request': request})
             return Response(serializer.data)
 
         # If anything went wrong, catch the exception and
