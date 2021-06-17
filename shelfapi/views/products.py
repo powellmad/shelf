@@ -72,6 +72,31 @@ class ProductView(ViewSet):
         except ValidationError as ex:
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, pk=None):
+        """Handle PUT operations
+        Returns:
+            Response -- JSON serialized product instance updated
+        """
+        product = Product.objects.get(pk=pk)
+        product.name = request.data["name"]
+        product.image_path = request.data["image_path"]
+        product.quantity = request.data["quantity"]
+        product.description = request.data["description"]
+        product.price = request.data["price"]
+
+        subcategory = Subcategory.objects.get(pk=request.data["subcategory_id"])
+        product.subcategory = subcategory
+        
+        shop = Shop.objects.get(pk=request.data["shop_id"])
+        product.shop = shop
+
+        try:
+            product.save()
+        except ValidationError as ex:
+            return Response({'reason': ex.message}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)        
+
     
 class ProductSerializer(serializers.ModelSerializer):
     """JSON serializer for products"""
