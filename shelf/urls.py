@@ -19,10 +19,11 @@ from django.contrib import admin
 from django.conf.urls import include
 from rest_framework import routers
 from shelfapi.views import register_user, login_user
-from shelfapi.views import CategoryView
+from shelfapi.views import CategoryView, ProductView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'categories', CategoryView, 'category')
+router.register(r'products', ProductView, 'product')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
