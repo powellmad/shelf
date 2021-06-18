@@ -71,10 +71,10 @@ class ShopView(ViewSet):
         Returns:
             Response -- Empty body with 204 status code
         """
-        shop = Shop().objects.get(pk=pk)
+        shop = Shop.objects.get(pk=pk)
         shop.name = request.data["name"]
-        shop.logo_path = request.data["logo_path"]
         shop.user = request.auth.user
+        shop.logo_path = request.data["logo_path"]
 
         category = Category.objects.get(pk=request.data["category_id"])
         shop.category = category
