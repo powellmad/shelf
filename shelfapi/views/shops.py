@@ -2,12 +2,10 @@ from shelfapi.views import categories
 from django.http import HttpResponseServerError
 from django.core.exceptions import ValidationError
 from rest_framework import status
-from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
-from django.contrib.auth.models import User
-from shelfapi.models import Shop, shop, Category
+from shelfapi.models import Shop, Category
 
 class ShopView(ViewSet):
 
@@ -38,7 +36,7 @@ class ShopView(ViewSet):
         """Handle POST operations
 
         Returns:
-            Response -- JSON serialized category instance
+            Response -- JSON serialized shop instance
         """
 
         # Create a new Python instance of the Category class
@@ -49,7 +47,7 @@ class ShopView(ViewSet):
         shop.logo_path = request.data["logo_path"]
         shop.user = request.auth.user
 
-        category = Category.objects.get(pk=request.data["category"])
+        category = Category.objects.get(pk=request.data["category_id"])
         shop.category = category
        
 
@@ -66,6 +64,27 @@ class ShopView(ViewSet):
         # client that something was wrong with its request data
         except ValidationError as ex:
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk=None):
+        """Handle PUT requests for a shop
+
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        shop = Shop().objects.get(pk=pk)
+        shop.name = request.data["name"]
+        shop.logo_path = request.data["logo_path"]
+        shop.user = request.auth.user
+
+        category = Category.objects.get(pk=request.data["category_id"])
+        shop.category = category
+
+        try:
+            shop.save()
+        except ValidationError as ex:
+            return Response({'reason': ex.message}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)        
 
 
 class ShopSerializer(serializers.ModelSerializer):
