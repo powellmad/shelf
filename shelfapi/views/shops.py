@@ -27,7 +27,7 @@ class ShopView(ViewSet):
         """
         try:
             shop = Shop.objects.get(pk=pk)
-            serializer = ShopSerializer(shop, context={'request': request})
+            serializer = ShopDetailSerializer(shop, context={'request': request})
             return Response(serializer.data)
         except Exception as ex:
             return HttpResponseServerError(ex)
@@ -93,4 +93,11 @@ class ShopSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
         fields = ('id', 'user', 'category', 'name', 'logo_path' )
+        depth = 1
+
+class ShopDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Shop
+        fields = ( 'name', 'logo_path', 'user', 'category', 'products' )
         depth = 1
