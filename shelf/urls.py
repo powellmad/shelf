@@ -19,12 +19,13 @@ from django.contrib import admin
 from django.conf.urls import include
 from rest_framework import routers
 from shelfapi.views import register_user, login_user
-from shelfapi.views import CategoryView, ProductView, ShopView
+from shelfapi.views import CategoryView, ProductView, ShopView, OrderView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'categories', CategoryView, 'category')
 router.register(r'products', ProductView, 'product')
 router.register(r'shops', ShopView, 'shop')
+router.register(r'orders', OrderView, 'order')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,5 +33,4 @@ urlpatterns = [
     path('login', login_user),
     path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
     path('', include(router.urls)),
-
 ]

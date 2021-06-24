@@ -7,6 +7,6 @@ from shelfapi.models import Category
 
 class Shop(models.Model):
     name = models.CharField(max_length=50)
-    logo_path = models.URLField()
+    logo_path = models.URLField(blank=True)
     category = models.ForeignKey(Category, on_delete=DO_NOTHING)
     user = models.ForeignKey(User, on_delete=CASCADE)

@@ -6,7 +6,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from shelfapi.models import Category, category
+from shelfapi.models import Category, category, Shop 
 
 class CategoryView(ViewSet):
 
@@ -32,7 +32,7 @@ class CategoryView(ViewSet):
         """
         try:
             category = Category.objects.get(pk=pk)
-            serializer = CategorySerializer(category, context={'request': request})
+            serializer = CategoryDetailSerializer(category, context={'request': request})
             return Response(serializer.data)
         except Exception as ex:
             return HttpResponseServerError(ex)
@@ -66,11 +66,27 @@ class CategoryView(ViewSet):
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 class CategorySerializer(serializers.ModelSerializer):
     """JSON serializer for categories"""
 
     class Meta:
         model = Category
-        fields = ( 'label', )
+        fields = ( 'id', 'label', )
         depth = 1
+
+class CategoryShopSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Shop
+        fields = ( 'name', 'products' )
+        depth = 1
+
+class CategoryDetailSerializer(serializers.ModelSerializer):
+    shop_set = CategoryShopSerializer(many=True)
+
+    class Meta:
+        model = Category
+        fields = ( 'label', 'shop_set' )
+        depth = 1
+
+
