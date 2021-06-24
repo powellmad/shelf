@@ -5,7 +5,6 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
 from shelfapi.models import Order, OrderProduct, Product
-from .products import ProductSerializer
 
 class OrderView(ViewSet):
     """Order items for Shelf customers"""
@@ -30,14 +29,36 @@ class OrderView(ViewSet):
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
+    def list(self, request):
+        """Handle GET requests to orders resource
+        Returns:
+            Response -- JSON serialized list of shops
+        """
+        user = User.objects.get(pk=request.auth.user.id)
+        shops = Order.objects.filter(user_id=user.id)
 
-class OrderSerializer(serializers.HyperlinkedModelSerializer):
+        serializer = OrderSerializer(
+            shops, many=True, context={'request': request})
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single order
+        Returns:
+            Response -- JSON serialized order instance
+        """
+        try:
+            order = Order.objects.get(pk=pk)
+            serializer = OrderSerializer(order, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
+
+
+class OrderSerializer(serializers.ModelSerializer):
     """JSON serializer for orders
     Arguments:
         serializers
     """
-
-    line_items = ProductSerializer(many=True)
 
     class Meta:
         model = Order
@@ -45,5 +66,5 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
             view_name='order',
             lookup_field='id'
         )
-        fields = ('id', 'payment_type', 'user_id', 'is_open', 'line_items',)
+        fields = ('id', 'payment_type', 'user_id', 'is_open', 'products')
         depth = 1

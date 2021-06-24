@@ -47,7 +47,7 @@ class ShopView(ViewSet):
         shop.logo_path = request.data["logo_path"]
         shop.user = request.auth.user
 
-        category = Category.objects.get(pk=request.data["category_id"])
+        category = Category.objects.get(pk=request.data["category"])
         shop.category = category
        
 

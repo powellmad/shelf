@@ -5,4 +5,3 @@ from .categories import CategoryView
 from .products import ProductView
 from .shops import ShopView
 from .order import OrderView
-from .orderproduct import OrderProductView

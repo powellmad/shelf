@@ -9,3 +9,4 @@ class Order(models.Model):
     payment_type = models.ForeignKey(Payment, on_delete=DO_NOTHING, null=True)
     shipping = models.ForeignKey(Shipping, on_delete=DO_NOTHING, null=True)
     is_open = models.BooleanField()
+    products = models.ManyToManyField('Product', through= 'OrderProduct')
