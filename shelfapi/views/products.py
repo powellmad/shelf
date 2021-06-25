@@ -52,8 +52,8 @@ class ProductView(ViewSet):
         product.description = request.data["description"]
         product.price = request.data["price"]
         
-        subcategory = Subcategory.objects.get(pk=request.data["subcategory_id"])
-        product.subcategory = subcategory
+        # subcategory = Subcategory.objects.get(pk=request.data["subcategory_id"])
+        # product.subcategory = subcategory
         
         shop = Shop.objects.get(pk=request.data["shop_id"])
         product.shop = shop
@@ -64,7 +64,7 @@ class ProductView(ViewSet):
         try:
             product.save()
             serializer = ProductSerializer(product, context={'request': request})
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         # If anything went wrong, catch the exception and
         # send a response with a 400 status code to tell the

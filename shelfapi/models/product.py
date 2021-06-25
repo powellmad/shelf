@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 
 class Product(models.Model): 
     name = models.CharField(max_length=50)
-    image_path = models.URLField()
+    image_path = models.URLField(null=True)
     quantity = models.IntegerField()
     description = models.TextField()
-    price = models.IntegerField()
-    subcategory = models.ForeignKey(Subcategory, on_delete=DO_NOTHING, related_name='products')
+    price = models.FloatField(default=00.00)
+    subcategory = models.ForeignKey(Subcategory, on_delete=DO_NOTHING, related_name='products', null=True)
     shop = models.ForeignKey(Shop, on_delete=CASCADE, related_name='products')
 
     @property
