@@ -79,16 +79,17 @@ class ProductView(ViewSet):
             Response -- Empty body with 204 status code
         """
         product = Product.objects.get(pk=pk)
+
         product.name = request.data["name"]
         product.image_path = request.data["image_path"]
         product.quantity = request.data["quantity"]
         product.description = request.data["description"]
         product.price = request.data["price"]
 
-        subcategory = Subcategory.objects.get(pk=request.data["subcategory_id"])
-        product.subcategory = subcategory
+        # subcategory = Subcategory.objects.get(pk=request.data["subcategory"])
+        # product.subcategory = subcategory
         
-        shop = Shop.objects.get(pk=request.data["shop_id"])
+        shop = Shop.objects.get(pk=request.data["shop"])
         product.shop = shop
 
         try:
