@@ -14,7 +14,7 @@ class ShopView(ViewSet):
         Returns:
             Response -- JSON serialized list of shops
         """
-        shops = Shop.objects.all().order_by('category')
+        shops = Shop.objects.all().order_by('name')
 
         serializer = ShopSerializer(
             shops, many=True, context={'request': request})
@@ -76,7 +76,7 @@ class ShopView(ViewSet):
         shop.user = request.auth.user
         shop.logo_path = request.data["logo_path"]
 
-        category = Category.objects.get(pk=request.data["category_id"])
+        category = Category.objects.get(pk=request.data["category"])
         shop.category = category
 
         try:

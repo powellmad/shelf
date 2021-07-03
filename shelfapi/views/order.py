@@ -21,7 +21,7 @@ class OrderView(ViewSet):
             )
         if request.method == "PUT":
             try:
-                order.is_open = True
+                order.is_open = False
                 
                 order.save()
                 return Response({}, status=status.HTTP_200_OK)
